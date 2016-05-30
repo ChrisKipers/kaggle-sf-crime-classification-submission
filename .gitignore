@@ -1,0 +1,6 @@
+.idea
+data
+test_predictions
+*.iml
+.DS_Store
+__pycache__
