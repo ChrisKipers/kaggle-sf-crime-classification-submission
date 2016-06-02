@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 class SplitDateTime(object):
 
@@ -6,16 +7,16 @@ class SplitDateTime(object):
         return self
 
     def transform(self, X):
-        dt_vals = pd.to_datetime(X.Dates)
+        dt_vals = pd.to_datetime(X)
 
         def get_vals(dt):
-            return pd.Series({
-                "year": dt.year,
-                "month": dt.month,
-                "day": dt.day,
-                "hour": dt.hour,
-                "minute": dt.minute
-            })
+            return [
+                dt.year,
+                dt.month,
+                dt.day,
+                dt.hour,
+                dt.minute
+            ]
 
-        parts_df = dt_vals.apply(get_vals)
-        return pd.concat([X[["X", "Y"]], parts_df], axis=1)
+        split_dates = [get_vals(x) for x in dt_vals]
+        return np.matrix(split_dates)
