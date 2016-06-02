@@ -61,5 +61,6 @@ probabilities_with_labels = pd.DataFrame(submission_prob)
 probabilities_with_labels.columns = label_encoder_columns
 
 submission_df = pd.concat([submission_data.Id, probabilities_with_labels], axis=1)
+# Score submitted to kaggle was 2.38866, which was ranked 466 out of 2251 at the time of submission.
 submission_df.to_csv("test_predictions/test_prediction1.csv", index=False)
 print("Submission csv ready.")
